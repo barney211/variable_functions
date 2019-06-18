@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百度地图电子围栏</title>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css">
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=u70A5pnNrRtRT1XAgwM5jL2YIVj1Gv97"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/GeoUtils/1.2/src/GeoUtils_min.js"></script>
+    <style>
+        #map{
+            width:800px;
+            height:600px;
+        }
+        .deleteFence{
+            position: absolute;
+            top:20px;
+            left:20px;
+            width:60px;
+            height:25px;
+            line-height: 25px;
+            background: lightgreen;
+            color:#fff;
+            text-align: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+   <div id="map">
+   </div>
+   <div class="deleteFence" onclick="deleteFence()">删除围栏</div>
+   <script type="text/javascript" src="./js/baiduMapFence.js"></script>
+</body>
+</html>

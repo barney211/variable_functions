@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="./css/sideW.css">
+    <title>ie8Canvas</title>
+    <!--IE8只能支持jQuery1.9--><!--[if lte IE 8]>
+    <script type="text/javascript" src="./static/html5.js"></script>
+    <script type="text/javascript" src="./static/excanvas.compiled.js"></script>
+
+    <![endif]-->
+    <script src="http://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/sideInfoShow.js"></script>
+
+</head>
+<body>
+<div>
+    <div class="sideInfo">
+        <div class="closeSide">
+            <img src="images/img2/closeBt.png" class="rightDarrow" alt="">
+            <img src="images/img2/ranks.png" style="position:absolute;right:18px;top:4px" class="forRanks" alt="">
+            <div class="ranksB">
+                <!--
+                    <div><span>心电监护</span><img class="subRb" data-id=1 src="images/img2/open.png" alt=""></div>
+                    <div><span>氧气压力</span><img class="subRb" data-id=2 src="images/img2/open.png" alt=""></div>
+                    <div><span>车辆状态</span><img class="subRb" data-id=3 src="images/img2/open.png" alt=""></div>
+                    <div><span>车辆电源</span><img class="subRb" data-id=4 src="images/img2/open.png" alt=""></div>
+                    -->
+            </div>
+        </div>
+        <div class="sideInfoUnderHeader" style="">  <!--background:rgba(0,0,0,0.58);-->
+            <div id="ecgTitle" class="subHeader" style="margin-top:3px;">
+                <div style="flex:1;"><img src="images/img2/heart.png" alt="" style="display:inline-block;margin-right:8px;">心电监护仪</div>
+                <div  style="flex:1;text-align: right">
+                    <span class="TheLead"></span>
+                    <img src="images/img2/pulse.png" class="pulses" style="" alt="">
+                </div>
+            </div>
+            <div class=" heartP" style="">
+
+                <div class=" heartShow">
+                    <div class="leftBox">
+                        <div style="display:flex;width:100%;height:20px;padding-top:5px;position:relative">
+                            <div style="flex:1;"><img src="images/img2/heartBt.png" id="leadPlate" alt="" style="width:35px;height:16px;margin-top:-5px;"></div>
+                            <div id="heartL" class="colorG">Ⅱ</div>
+                            <div id="times" style="flex:1;" class="colorG"></div>
+                            <div style="flex:2;" class="colorG">治疗</div>
+                            <div style="flex:2;" class="colorG">陷波50HZ</div>
+                        </div>
+                        <!--<div id="line" style="width:220px;height:60px;"></div>-->
+                        <canvas id="c1" width="228" height="70" style="background: transparent;margin-top:5px;"></canvas>
+                        <div class="marker1"><span id="smallMarker">1mV</span></div>
+                        <div style="display:flex;width:100%;height:20px;">
+                            <div style="flex:1;color:yellow;">Resp</div>
+                            <div style="flex:1;color:yellow;"></div>
+                            <div style="flex:4;color:yellow;">||</div>
+                        </div>
+                        <canvas id="c2" width="228" height="70" style="background: transparent;"></canvas>
+                    </div>
+                    <div class="rightBox">
+                        <div class="rightSub">
+                            <div style="width:100%;height:15px;display: flex;justify-content: space-between;padding:5px;">
+                                <div class="colorG">ECG</div>
+                                <div class="colorG">bpm</div>
+                            </div>
+                            <div style="margin-top:30px;display:flex;">
+                                <div style="flex:1;text-align: center;">
+                                    <div class="colorG">120</div>
+                                    <div class="colorG">50</div>
+                                </div>
+                                <div id="heartR" style="flex:3;margin-top:-5px;font-size:30px;font-weight: bold" class="colorG">Null</div>
+                            </div>
+                        </div>
+                        <div class="rightSub" >
+                            <div style="width:100%;height:15px;display: flex;justify-content: space-between;padding:5px;">
+                                <div style="color:yellow;">Resp</div>
+                                <div style="color:yellow;">rpm</div>
+                            </div>
+                            <div style="margin-top:35px;display:flex;">
+                                <div style="flex:1;text-align: center;">
+                                    <div></div>
+                                </div>
+                                <div id="respR" style="flex:3;color:yellow;font-size:30px;margin-top:-10px;font-weight: bold">Null</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--N系列边栏html  向下-->
+                    <div class="Ntop">
+                        <div class="leftN">
+                            <canvas id="cN1" width="275" height="46"></canvas>
+                            <canvas id="cN2" width="275" height="46"></canvas>
+                            <canvas id="cN3" width="275" height="34"></canvas>
+                            <canvas id="cN4" width="275" height="46"></canvas>
+                        </div>
+                        <div class="leftNCover">
+                            <canvas id="cN5" width="275" height="46"></canvas>
+                            <canvas id="cN6" width="275" height="46"></canvas>
+                            <canvas id="cN7" width="275" height="34"></canvas>
+                            <canvas id="cN8" width="275" height="46"></canvas>
+                        </div>
+                        <div class="rightN">
+                            <div class="rightNSub" style="height:46px;">
+                                <!-- <div style="display:flex;height:100%;">-->
+                                <div class="leftInfo" style="">
+                                    <div>ECG</div>
+                                    <div>bpm</div>
+                                </div>
+                                <div class="leftInfo" style="">
+                                    <div>120</div>
+                                    <div>50</div>
+                                </div>
+                                <div id="heartRate" class="rightInfo" style="">
+                                    --
+                                </div>
+                                <!--</div>-->
+                            </div>
+                            <div class="rightNSub" style="height:46px;color:#08f2f5">
+                                <!-- <div style="display:flex;height:100%;"> -->
+                                <div class="leftInfo" style="">
+                                    <div>Sp02</div>
+                                    <div>%</div>
+                                </div>
+                                <div class="leftInfo" style="">
+                                    <div>100</div>
+                                    <div>90</div>
+                                </div>
+                                <div id="sp02" class="rightInfo" style="">
+                                    --
+                                </div>
+                                <!--</div>-->
+                            </div>
+                            <div class="rightNSub" style="height:34px;color:#f2394f;">
+                                <!--<div style="display:flex;height:100%;">-->
+                                <div class="leftInfo" style="flex:2;">
+                                    <div>Art</div>
+                                    <div>mmHg</div>
+                                </div>
+                                <div class="leftInfo" style="flex:1;">
+                                    <div>160</div>
+                                    <div style="width:100%;text-align:right;">90</div>
+                                </div>
+                                <div id="artData" class="rightInfo" style="flex:3; font-size:12px;   transform: scale(0.8,0.8); transform-origin: 0;position:relative;top:-5px;left:-5px;">
+                                    --
+                                </div>
+                                <!--</div>-->
+                            </div>
+                            <div class="rightNSub" style="height:46px;color:yellow">
+                                <!--<div style="display:flex;height:100%;">-->
+                                <div class="leftInfo" style="">
+                                    <div>Resp</div>
+                                    <div>rpm</div>
+                                </div>
+                                <div class="leftInfo" style="">
+                                    <div>30</div>
+                                    <div>g</div>
+                                </div>
+                                <div id="respRate" class="rightInfo" style="">
+                                    --
+                                </div>
+                                <!-- </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="temp_bottom">
+                        <div style="flex:1;color:white;">T1&nbsp;&nbsp;&nbsp;<span style="font-size:12px;">38.0-35.0</span >&nbsp;&nbsp;&nbsp;<span id="temp1">--</span></div>
+                        <div style="flex:1; color:#E67550;">T2&nbsp;&nbsp;&nbsp;<span style="font-size:12px;">38.0-35.0</span id="temp2">&nbsp;&nbsp;&nbsp;<span id="temp2">--</span></div>
+                    </div>
+                    <!--N系列边栏html  向上-->
+                    <!-- <div class="heartPCover" style="position: absolute;top:0;left:0;width:100%;height:100%;background: rgba(0,0,0,0.85);display:block;"></div> -->
+                </div>
+
+            </div>
+            <div id="oxygenTitle" class="subHeader" style=";">
+                <div style="flex:1;" class="wave"><img src="images/img2/oxygen.png" style="margin-top:-3px;margin-right:6px;height:16px;" alt="">氧气压力</div>
+            </div>
+            <div class="oxgen">
+
+                <div class="oxgenShow" style="position: relative">
+                    <div style="position: relative;margin-top:20px;">
+                        <img src="images/img2/twoOxygen.png" style="margin-left:12px;" alt="">
+                        <canvas id="ctx" width="40" height="80" style="position: absolute;top:30px;left:12px;background:#ffffff"></canvas>
+                        <canvas id="ctx1" width="40" height="80" style="position: absolute;top:30px;left:63px;background:#ffffff"></canvas>
+                    </div>
+                    <div class="showOInfo" style="position: absolute;left:123px;top:18px;display: flex;width:240px;font-size:12px;color:#fff;font-family: 'Microsoft YaHei UI'">
+                        <div id="oxygen1" style="flex:1;">
+                            <div >1号氧气瓶</div>
+                            <div>总量：-MPa</div>
+                            <div>剩余：-Mpa</div>
+                            <div>剩余比例：-%</div>
+                            <div>可使用分钟数：</div>
+                            <div><span style="color:#ffb750;font-size: 18px;">-</span>min</div>
+                        </div>
+                        <div id="oxygen2" style="flex:1">
+                            <div>2号氧气瓶</div>
+                            <div>总量：-MPa</div>
+                            <div>剩余：-MPa</div>
+                            <div>剩余比例：-%</div>
+                            <div>可使用分钟数：</div>
+                            <div><span style="color:#ffb750;font-size: 18px;">-</span>min</div>
+                        </div>
+                    </div>
+                    <div style="flex:1;"></div>
+                </div>
+            </div>
+            <div id="panelTitle" class="subHeader">
+                <div style="flex:1;" class="wave"><img src="images/img2/panel.png" style="margin-right:6px;margin-bottom:3px;" alt="">车辆状态</div>
+            </div>
+            <div class="panel" style="background: transparent;position: relative;margin-bottom:0;">
+
+                <div class="panelShow" style="">
+                    <div id="panel" style="">
+                        <div style="color:#fff;font-size:10px;left:11px;top:2px;">0℃</div>
+                        <div style="color:#fff;font-size:10px;right:11px;top:2px;">00:00</div>
+                        <div class="cost" style="">
+                            <span style="display:inline-block">总花费:￥00.00</span>
+                            <span id="forChromeStyle" style="display:inline-block;margin-left:20px;">每公里花费:￥0.00</span>
+                        </div>
+                        <div class="Data-middle">
+                            <div>
+                                <span>行驶里程</span>
+                                <span style="width:62px;text-align: right;font-weight:normal;">000km</span>
+                            </div>
+                            <div>
+                                <span>行驶时间</span>
+                                <span style="width:62px;text-align: right;font-weight:normal;">00min</span>
+                            </div>
+                            <div>
+                                <span>行驶油耗</span>
+                                <span style="width:52px;text-align: center;margin-left:10px;font-weight:normal;">0L</span>
+                            </div>
+                        </div>
+                        <div class="totalMileage">000km</div>
+                        <div class="speed">
+                            0
+                        </div>
+                        <div class="fuelCost">
+                            0
+                        </div>
+                        <div class="gear">P</div>
+                        <div class="state" style="left:12px;">C</div>
+                        <div class="state" style="left:142px;">H</div>
+                        <div class="state" style="right:142px;">E</div>
+                        <div class="state" style="right:12px;">F</div>
+                        <canvas id="cc1" width="115" height="5" style="left:23px;"></canvas>
+                        <canvas id="cc2" width="115" height="5" style="right:23px;"></canvas>
+                        <img src="./images/img2/fault2.png" alt="" class="alarm">
+                    </div>
+
+
+                </div>
+                <!--
+                <div class="panelShow" style="position: relative;">
+                    <div id="panel" style="margin-top:20px;width:100%;height:155px;background: white;opacity:0.9;"></div>
+                    <div style="position: absolute;left:48px;bottom:28px;"><span class="speed" style="font-size: 24px;color:#f36132;"></span><span style="font-size:10px;color:#333333">L油耗</span></div>
+                    <div style="position: absolute;left:200px;bottom:28px;"><span class="mileage" style="font-size: 24px;color:#5c9a5c;"></span><span style="font-size:10px;color:#333333">Km里程</span></div>
+                </div>
+                -->
+                <div class="NullCover" style="position: absolute;top:0;left:0;width:100%;height:100%;background: rgba(0,0,0,0.65);display:none;"></div>
+            </div>
+            <div id='powerTitle' class="subHeader">
+                <div style="flex:1;" class="wave"><img src="images/img2/power.png" style="margin-right:6px;margin-bottom:3px;" alt="">车辆电源</div>
+            </div>
+            <div class="power">
+                <div class="powerShow" style="position: relative;">
+                    <div id="voltage" style="width:50%;border-right:1px dashed #ffffff;display: flex;">
+                        <div style="flex:1">
+                            <img id="bartteryStatus" src="images/img2/battery.png" alt="" style="">
+                        </div>
+                        <div  class="leftBbox" style="">
+                            <div>电压:<span class="leftVoltage"></span> <span>V</span></div>
+                            <div>容量:<span class="VoltageRemaining"></span> <span>%</span></div>
+                        </div>
+
+                    </div>
+                    <div class="voltageCover" style="width:175px;height:75px;background: rgba(0,0,0,0.65);position:absolute;left:0;top:0px;"></div>
+                    <div id="current" style="width:50%;display:flex;position: relative;">
+                        <div id="rightB" style="">
+                            <div>电流:<span><span></span></span></div>
+                            <div>电压:<span><span></span></span></div>
+                        </div>
+                        <div style="flex:1;text-align: right;">
+                            <img class="plugin" src="images/img2/noPlugin.png" alt="" style="">
+                        </div>
+                        <div class="walt" style="position: absolute;top:42px;left:123px"><span></span><span>w</span></div>
+                    </div>
+                </div>
+                <!--<div class="powerShow" style="display:flex;padding-top:10px;">-->
+                <!--<div style="flex:1;">-->
+                <!--<img2 src="img2/battery.png" alt="">-->
+                <!--<div style="margin-top: 8px">电瓶电压：<span>12.6v</span></div>-->
+                <!--<div>电瓶容量：<span>89%</span></div>-->
+                <!--</div>-->
+
+                <!--<div style="flex:2;padding-left:20px;">-->
+                <!--<img2 src="img2/working.png" alt="">-->
+                <!--<div style="margin-top: 8px">工作电流：<span>12.6v</span></div>-->
+                <!--<div>工作电压：<span>89%</span></div>-->
+                <!--<div>工作功率：<span>12.6v</span></div>-->
+
+                <!--</div>-->
+                <!--</div>-->
+            </div>
+            <!--血气设备  下-->
+            <div id="bloodTitle" class="subHeader" style="margin-top:10px;">
+                <div style="flex:1;" class="wave"><img src="images/img2/medicalEquiptment1.png" style="margin-right:6px;margin-bottom:3px;" alt="">血气设备</div>
+            </div>
+            <div class="bloodGas">
+                <div>报告基本信息:</div>
+                <div class="subItemOfBloodGas">
+                    <div style='flex:2'>
+                        <p>仪器ID</p>
+                        <p>样本类型</p>
+                        <p>测试时间</p>
+                        <p>病人ID</p>
+                        <p>操作者ID</p>
+                    </div>
+                    <div style='flex:3' id="bloodGasBasicInfo">
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div style='flex:2'></div>
+                </div>
+                <div>病人信息:</div>
+                <div class="subItemOfBloodGas">
+                    <div style='flex:2'>
+                        <p>体温</p>
+                        <p>性别</p>
+                        <p>tHb</p>
+                        <p>FIO2</p>
+                        <p>RQ</p>
+                    </div>
+                    <div id="patientInfoValue">
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div>
+                        <p>℃</p>
+                        <p></p>
+                        <p>g/dL</p>
+                        <p>%</p>
+                        <p></p>
+                    </div>
+                    <div id='patientInfoRange' style='flex:2'>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                </div>
+                <div>血气值:</div>
+                <div class="subItemOfBloodGas">
+                    <div style='flex:2'>
+                        <p>PH</p>
+                        <p>pO2</p>
+                        <p>pCO2</p>
+                    </div>
+                    <div id="bloodGasInfoValue">
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div>
+                        <p></p>
+                        <p>mmHg</p>
+                        <p>mmHg</p>
+                    </div>
+                    <div id='bloodGasDataRange' style='flex:2'>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div id="bloodGasConclusion">
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                </div>
+                <div>血氧值:</div>
+                <div class="subItemOfBloodGas">
+                    <div style='flex:2'>
+                        <p>Hct</p>
+                        <p>tHb(est),r</p>
+                        <p>so2(est),r</p>
+                    </div>
+                    <div id="bloodOxygenValue">
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div>
+                        <p>%</p>
+                        <p>g/dL</p>
+                        <p>%</p>
+                    </div>
+                    <div id='bloodOxygenRange' style='flex:2'>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div id='bloodOxygenConclusion'>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                </div>
+                <div>电解质值:</div>
+                <div class="subItemOfBloodGas">
+                    <div style='flex:2'>
+                        <p>Na+</p>
+                        <p>K+</p>
+                        <p>Ca++</p>
+                        <p>Cl-</p>
+                        <p>Ca++(7.4),r</p>
+                    </div>
+                    <div id="electrolyteValue">
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div>
+                        <p>mmol/L</p>
+                        <p>mmol/L</p>
+                        <p>mmol/L</p>
+                        <p>mmol/L</p>
+                        <p>mmol/L</p>
+                    </div>
+                    <div id='electrolyteRange' style='flex:2'>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div id="electrolyteConclusion">
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                </div>
+                <div>代谢物值:</div>
+                <div class="subItemOfBloodGas">
+                    <div style='flex:2'>
+                        <p>Glu</p>
+                        <p>Lac</p>
+                    </div>
+                    <div id='metaboliteValue'>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div>
+                        <p>mmol/L</p>
+                        <p>mmol/L</p>
+                    </div>
+                    <div id='metaboliteRange' style='flex:2'>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div id='metaboliteConclusion'>
+                        <p></p>
+                        <p></p>
+                    </div>
+                </div>
+                <div>温度修正值:</div>
+                <div class="subItemOfBloodGas">
+                    <div style='flex:2'>
+                        <p>cH+(T),r</p>
+                        <p>pH(T),r</p>
+                        <p>pCO2(T),r</p>
+                        <p>pO2(T),r</p>
+                        <p>pO2(A-a)(T),r</p>
+                        <p>pO2(A/a)(T),r</p>
+                        <p>RI(T),r</p>
+                        <p>pO2(T)/FIO2,r</p>
+                    </div>
+                    <div id="tempCorrectionValue">
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div>
+                        <p>mmol/L</p>
+                        <p></p>
+                        <p>mmHg</p>
+                        <p>mmHg</p>
+                        <p>mmHg</p>
+                        <P></P>
+                        <P></P>
+                        <p>mmHg</p>
+                    </div>
+                    <div id='tempCorrectionRange' style='flex:2'>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div id='tempCorrectionConclusion'>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                </div>
+                <div>酸碱状态:</div>
+                <div class="subItemOfBloodGas">
+                    <div style='flex:2'>
+                        <p>cH+,r</p>
+                        <p>HCO3-act,r</p>
+                        <p>HCO3-std,r</p>
+                        <p>BE(ecf),r</p>
+                        <p>BE(B),r</p>
+                        <p>BB(B),r</p>
+                        <p>ctCO2,r</p>
+                        <p>pO2(A-a),r</p>
+                        <p>pO2(A/a),r</p>
+                        <p>RI,r</p>
+                        <p>pO2/FIO2,r</p>
+                        <p>AnGap,r</p>
+                        <p>mOsm,r</p>
+                    </div>
+                    <div id="acidValue">
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div>
+                        <p>mmol/L</p>
+                        <p>mmol/L</p>
+                        <p>mmol/L</p>
+                        <p>mmol/L</p>
+                        <p>mmol/L</p>
+                        <p>mmol/L</p>
+                        <p>mmol/L</p>
+                        <p>mmHg</p>
+                        <p></p>
+                        <p></p>
+                        <p>mmHg</p>
+                        <p>mmol/L</p>
+                        <p>mOsm/L</p>
+                    </div>
+                    <div id="acidRange" style='flex:2'>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div id="acidConclusion">
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <!--血气设备  上-->
+        </div>
+    </div>
+
+    <!--N系列全屏展示（向下） 0727 -->
+    <div class="N1large">
+        <div class="heartWaves">
+            <div class="normalLeads">
+            </div>
+            <div class="vLeads" style="margin-right:20px;">
+            </div>
+        </div>
+        <div class="mainInfo">
+            <div id="ecgTime" style="position:absolute;top:6px;right:35px;color:#4EF97F;font-size:14px;"></div>
+            <!--N系列的视图（向下）-->
+            <!-- <div class="N1interface" style="">-->
+            <div class="leftWaveInfo">
+                <div class="leftNL" style="width:65%;">
+                    <!--<div class='heartWaveIndexL' style='color:#4ef97f'><span>Ⅱ</span><span>x1</span><span>诊断</span><span>陷波关</span></div>-->
+                    <!--<canvas id="cN11" width="550" height="125"></canvas>-->
+                    <!--<div class='heartWaveIndexL' style='color:#08f2f5'><span>Pleth</span></div>-->
+                    <!--<canvas id="cN22" width="550" height="125"></canvas>-->
+                    <!--<div>-->
+                    <!--<div class='heartWaveIndexL' style='color:#f2394f'><span>Art</span></div>-->
+                    <!--<canvas id="cN33" width="550" height="125"></canvas>-->
+                    <!--</div>-->
+                    <!--<div class='heartWaveIndexL' style='color:yellow'><span>Resp</span><span>x2</span><span>Ⅱ</span></div>-->
+                    <!--<canvas id="cN44" width="550" height="125"></canvas>-->
+                </div>
+                <div class="rightInfos" style="width:35%;">
+                    <div style="width:100%;height:30px;"></div>
+                    <div class="height11" style='color:#4ef97f;font-size: 14px;position:relative;'>
+                        <div class="heartD1" style=''>
+                            <div>ECG</div>
+                            <div style='font-size:12px;'>bpm</div>
+                        </div>
+                        <div class="heartD2" style=''>
+                            <div>120</div>
+                            <div>50</div>
+                        </div>
+                        <div id='heartRateFS' style=''>
+                            --
+                        </div>
+                    </div>
+                    <div style="width:100%;height:30px;"></div>
+                    <div class="height1" style='color:#08f2f5;font-size: 14px'>
+                        <div class="plethD1" style=''>
+                            <div>Sp02</div>
+                            <div style='font-size:12px;'>%</div>
+                        </div>
+                        <div class="plethD2" style=''>
+                            <div>100</div>
+                            <div>90</div>
+                        </div>
+                        <div id='PlethRateFS' style=''>
+                            --
+                        </div>
+                        <div style="font-size:12px;position:absolute;top:10px;right:10px;width:60px;font-size:18px;">
+                            <div class="plethD3"> PI<span id="pIndex" class="inlineSpan">--</span></div>
+                            <div class="plethD4">PR<span id="pRate" class="inlineSpan">--</span></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="rightDataInfo">
+                <div class="rightNL" style="width:65%;position:relative;">
+
+                </div>
+                <div class="rightInfos" style="width:35%;">
+                    <div style="width:100%;height:30px;"></div>
+                    <div class="height2" style='color:#f2394f;font-size: 14px;margin-bottom:0;'>
+                        <div class="artData1" style=''>
+                            <div>Art</div>
+                            <div style='font-size:12px;'>mmHg</div>
+                        </div>
+                        <div class="artData2" style=''>
+                            <div>160</div>
+                            <div>90</div>
+                        </div>
+                        <div id='artRateFS' style=''>
+                            <div id="artFullScreen1">--/--</div>
+                            <div id="artFullScreen2">--</div>
+                        </div>
+                    </div>
+                    <div style="width:100%;height:30px;"></div>
+                    <div class="height1" style='color:yellow;font-size: 14px;top:10px;'>
+                        <div class="respD1" style=''>
+                            <div>Resp</div>
+                            <div style='font-size:12px;'>rpm</div>
+                        </div>
+                        <div class="respD2" style=''>
+                            <div>30</div>
+                            <div>g</div>
+                        </div>
+                        <div id='respRateFS' style=''>
+                            --
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--展示温度-->
+
+            <div class="bottomInforL">
+                <div class="bottomInforLsub1" style="">
+                    <div style="position: relative;height:50%; margin-bottom:15px;">
+                        <div style="position: absolute;top:0;left:0;font-size: 16px;">T1</div>
+                        <div style="position: absolute;left:10%;bottom:0;font-size: 12px;">
+                            38.0<br/>
+                            35.0
+                        </div>
+                        <div id="T1" style="position: absolute;left:30%;top:-5px;font-size: 40px;">
+                            --
+                        </div>
+                    </div>
+                    <div style="position: relative;height:50%;color:#E67550">
+                        <div style="position: absolute;top:0;left:0;font-size: 16px;">T2</div>
+                        <div style="position: absolute;left:10%;bottom:0;font-size: 12px;">
+                            38.0<br/>
+                            35.0
+                        </div>
+                        <div id="T2" style="position: absolute;left:30%;top:-5px;font-size: 40px;">
+                            --
+                        </div>
+                    </div>
+                </div>
+                <div class="bottomInforLsub2" style="text-align:right;padding-right:12px;">
+                    <div style="font-size:20px;">NIBP</div>
+                    <div>160</div>
+                    <div>90</div>
+                    <div id="nibpTime">--:--</div>
+                </div>
+                <div class="bottomInforLsub3" style="">
+                    <div style="margin:0 auto;text-align:center;">手动</div>
+                    <div style="font-size:50px;padding-left:10px;">
+                        <span id="NIBPSYS">--</span>/<span id="NIBPDIA">--</span>
+                    </div>
+                </div>
+                <div class="bottomInforLsub2" style="">
+                    <div>mmHg</div>
+                    <div id="NIBPMEAN" style="font-size:20px;margin-top:28px;">(--)</div>
+                </div>
+
+            </div>
+
+            <!--</div>-->
+
+            <!--N系列视图(向上)-->
+            <!--新加心电回放(向下)-->
+            <div id="ecgPlayBack">
+                <img id="ecgPlayBt" src="./images/img2/pauseECG.png" style="margin-right:7px;width:25px;height:25px;margin-top:22px;">
+                <div id="ruler">
+                    <img src="./images/img2/niddle.png" id="niddle">
+                </div>
+                <img id="backToTimingEcg" src="./images/img2/backECG.png" style="width:25px;height:25px;margin-top:22px;margin-left:7px;display:none"/>
+            </div>
+            <!--新加心电回放(向上)-->
+        </div>
+        <div style=' position: absolute;top:5px;right:5px;width:20px;height:20px;'><img id='closeFullScreen' src='./images/img2/heartCloseBt.png' style='width:100%;height:100%'></div>
+    </div>
+
+</div>
+</body>
+</html>

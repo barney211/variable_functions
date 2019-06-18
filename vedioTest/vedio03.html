@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>引入本地vedio.js</title>
+    <!--<link rel="stylesheet" href="./video-js.css">-->
+    <!--<script src="./video.min.js"></script>-->
+    <!--<script src="./zh-CN.js"></script>-->
+
+    <link href="http://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet">
+    <script src="http://vjs.zencdn.net/5.8.8/video.js"></script>
+</head>
+<body>
+<video id="container" class="video-js vjs-big-play-centered" controls preload="auto" autoplay width="600" height="300" loop="loop" webkit-playsinline data-setup="{}">
+    <source src="rtmp://120.78.84.173:52468/live/000123456789_1_1" type="rtmp/flv"/>
+</video>
+
+</body>
+</html>

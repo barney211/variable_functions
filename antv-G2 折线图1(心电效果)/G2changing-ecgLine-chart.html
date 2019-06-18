@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height">
+    <title>基础折线图</title>
+    <style>
+        ::-webkit-scrollbar{display:none;}html,body{overflow:auto;height:100%;margin:0;}
+        .chartCover{
+            position: absolute;
+            left:0;
+            top:0;
+            z-index: 999;
+            width:400px;
+            height:100px;
+            display: block;
+        }
+        *{
+            box-sizing: border-box;
+        }
+        .chart{
+            position: relative;
+            width:400px;
+            height:100px;
+        }
+    </style>
+</head>
+<body>
+<div id="mountNode" class="chart">
+    <canvas id="chartCover" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode1" class="chart">
+    <canvas id="chartCover1" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode2" class="chart">
+    <canvas id="chartCover2" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode3" class="chart">
+    <canvas id="chartCover3" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode4" class="chart">
+    <canvas id="chartCover4" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode5" class="chart">
+    <canvas id="chartCover5" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode6" class="chart">
+    <canvas id="chartCover6" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode7" class="chart">
+    <canvas id="chartCover7" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode8" class="chart">
+    <canvas id="chartCover8" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode9" class="chart">
+    <canvas id="chartCover9" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode10" class="chart">
+    <canvas id="chartCover10" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode11" class="chart">
+    <canvas id="chartCover11" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode12" class="chart">
+    <canvas id="chartCover12" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode13" class="chart">
+    <canvas id="chartCover13" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode14" class="chart">
+    <canvas id="chartCover14" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode15" class="chart">
+    <canvas id="chartCover15" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode16" class="chart">
+    <canvas id="chartCover16" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode17" class="chart">
+    <canvas id="chartCover17" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode18" class="chart">
+    <canvas id="chartCover18" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode19" class="chart">
+    <canvas id="chartCover19" width="400" height="100" class="chartCover"></canvas>
+</div>
+<div id="mountNode20" class="chart">
+    <canvas id="chartCover20" width="400" height="100" class="chartCover"></canvas>
+</div>
+<script>/*Fixing iframe window.innerHeight 0 issue in Safari*/document.body.clientHeight;</script>
+<script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.5.1/dist/g2.min.js"></script>
+<script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.10.1/dist/data-set.min.js"></script>
+<script>
+
+
+    //2. G2实现绘图效果  下
+    var data = [];
+    //制造数据
+    for(var i=0;i<100;i++){
+        var obj={};
+        obj.point=i;
+        if(Math.random()<0.5){
+            var pan=-1;
+        }else{
+            var pan=1
+        }
+        obj.value=Math.floor(Math.random()*100)*pan;
+        data.push(obj)
+    }
+    G2.Global.renderer = 'svg'
+
+    var dataTemp=JSON.stringify(data)
+    var data1=JSON.parse(dataTemp);
+    var data2=JSON.parse(dataTemp);
+    var data3=JSON.parse(dataTemp);
+    var data4=JSON.parse(dataTemp);
+    var data5=JSON.parse(dataTemp);
+    var data6=JSON.parse(dataTemp);
+    var data7=JSON.parse(dataTemp);
+    var data8=JSON.parse(dataTemp);
+    var data9=JSON.parse(dataTemp);
+    var data10=JSON.parse(dataTemp);
+    var data11=JSON.parse(dataTemp);
+    var data12=JSON.parse(dataTemp);
+    var data13=JSON.parse(dataTemp);
+    var data14=JSON.parse(dataTemp);
+    var data15=JSON.parse(dataTemp);
+    var data16=JSON.parse(dataTemp);
+    var data17=JSON.parse(dataTemp);
+    var data18=JSON.parse(dataTemp);
+    var data19=JSON.parse(dataTemp);
+    var data20=JSON.parse(dataTemp);
+    var data21=JSON.parse(dataTemp);
+
+    var chartList=[
+        {chart:'mountNode',cover:'chartCover',data:data1},
+        {chart:'mountNode1',cover:'chartCover1',data:data2},
+        {chart:'mountNode2',cover:'chartCover2',data:data3},
+        {chart:'mountNode3',cover:'chartCover3',data:data4},
+        {chart:'mountNode4',cover:'chartCover4',data:data5},
+        {chart:'mountNode5',cover:'chartCover5',data:data6},
+        {chart:'mountNode6',cover:'chartCover6',data:data7},
+        {chart:'mountNode7',cover:'chartCover7',data:data8},
+        {chart:'mountNode8',cover:'chartCover8',data:data9},
+        {chart:'mountNode9',cover:'chartCover9',data:data10},
+        {chart:'mountNode10',cover:'chartCover10',data:data11},
+        {chart:'mountNode11',cover:'chartCover11',data:data12},
+        {chart:'mountNode12',cover:'chartCover12',data:data13},
+        {chart:'mountNode13',cover:'chartCover13',data:data14},
+        {chart:'mountNode14',cover:'chartCover14',data:data15},
+        {chart:'mountNode15',cover:'chartCover15',data:data16},
+        {chart:'mountNode16',cover:'chartCover16',data:data17},
+        {chart:'mountNode17',cover:'chartCover17',data:data18},
+        {chart:'mountNode18',cover:'chartCover18',data:data19},
+        {chart:'mountNode19',cover:'chartCover19',data:data20},
+        {chart:'mountNode20',cover:'chartCover20',data:data21}
+    ]
+
+    for(let i=0;i<chartList.length;i++){
+       drawEffect(chartList[i].chart,chartList[i].cover,chartList[i].data)
+    }
+
+    //绘制单个心电的函数
+    function drawEffect(chartId,coverId,chartData) {
+        //1. 给G2添加覆盖层用于产生覆盖效果
+        var cover=document.getElementById(coverId);
+        var ctx=cover.getContext('2d')
+
+        var chart = new G2.Chart({
+            container: chartId,
+            forceFit: false,
+            height: 100,
+            width:400,
+            padding:0,
+            animate:false,
+            background:{
+                fill:'black',
+                fillOpacity:1
+
+            }
+        });
+        chart.source(chartData);
+        chart.scale('value', {
+            min: -100,
+            max:100
+        });
+        chart.scale('point', {
+            range: [0, 1]
+        });
+
+        chart.tooltip(false);
+
+        chart.line().position('point*value').color('#0BF74D').style({
+            lineWidth:1.5
+        });
+        chart.axis(false) //去掉背景中的坐标轴
+        chart.render();
+
+        //动态生成新数据产生动画效果
+        var count=0;
+
+        var timer=setInterval(function () {
+            if(Math.random()<0.5){
+                var pan=-1;
+            }else{
+                var pan=1
+            }
+            var value=Math.floor(Math.random()*100)*pan;
+            if(count>1){
+                if(value-chartData[count-1].value>5){
+                    value=chartData[count-1].value+5;
+                }
+            }
+         chartData[count].value=value;
+            //先绘制cover中的rect使之产生覆盖的效果
+            ctx.clearRect(0,0,400,100)
+            ctx.fillStyle='black'
+            ctx.fillRect(chartData[count].point*4,0,10,100)
+            chart.render()
+            count++;
+            if(count>99){
+                count=0;
+            }
+        },40)
+    }
+
+
+
+    //2. G2实现绘图效果  上
+</script>
+</body>
+</html>

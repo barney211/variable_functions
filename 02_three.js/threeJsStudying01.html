@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ThreeJsStudying</title>
+    <script src="./js/three-min.js"></script>
+</head>
+<body>
+  <div id="content"></div>
+<script>
+    //1.初始化场景、相机、渲染器
+     var scene= new THREE.Scene();
+     var camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,1,1000);
+     var renderer=new THREE.WebGLRenderer();
+
+     renderer.setSize(window.innerWidth,window.innerHeight);//渲染比例最好和相机比例一致，避免变形
+    //2.添加物体
+    var box=new THREE.Mesh(
+        new THREE.BoxGeometry(2,2,2),
+        new THREE.MeshBasicMaterial({
+            color:'#EB374D'
+        })
+    )
+    box.position.set(0,0,0) //立方体位置
+    scene.add(box)
+    //2.1给立方体添加边框(不可旋转)
+    /*
+    var border=new THREE.BoxHelper(box,'#fff')
+    scene.add(border)
+    */
+    //2.1给立方体添加边框(可旋转)
+    var edges=new THREE.EdgesHelper(box,'#fff')
+    scene.add(edges)
+
+
+    //3.摆放相机
+    camera.position.set(5,5,5)
+    camera.lookAt(box.position)
+
+    //渲染
+    document.getElementById('content').appendChild(renderer.domElement);
+    renderer.render(scene,camera)
+
+    animate();
+    function animate() {
+
+        requestAnimationFrame( animate );
+
+        box.rotation.x += 0.01;
+        box.rotation.y += 0.02;
+
+        renderer.render( scene, camera );
+
+    }
+
+</script>
+</body>
+</html>

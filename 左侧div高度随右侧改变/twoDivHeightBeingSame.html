@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,html{
+            height:100%;
+            padding:0;
+            margin:0;
+        }
+        .container {width:960px; height:100%; overflow:auto; margin:0 auto;}
+        .left {height:100%; width:100px; overflow:hidden;background: powderblue;word-break: break-all; padding-bottom:9999px; margin-bottom:-9999px; float:left;}
+        .right {width:10px; float:left; height:auto;background: pink;word-break: break-all;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <section class="left">
+        鹅鹅鹅曲项向天歌
+    </section>
+    <section class="right" id="right">
+        床前明月光，疑是地上霜，举头望明月，低头思故乡
+        床前明月光，疑是地上霜，举头望明月，低头思故乡
+
+    </section>
+     <button onclick="test()">按钮</button>
+</div>
+<script>
+  function test() {
+      console.log(11)
+      document.getElementById('right').innerHTML=
+          '床前明月光，疑是地上霜，举头望明月，低头思故乡\n' +
+          '        床前明月光，疑是地上霜，举头望明月，低头思故乡'+'床前明月光，疑是地上霜，举头望明月，低头思故乡\n' +
+          '        床前明月光，疑是地上霜，举头望明月，低头思故乡'
+
+  }
+</script>
+</body>
+</html>

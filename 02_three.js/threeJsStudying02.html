@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/three.js"></script>
+    <script src="./js/seaObject.js"></script>
+    <script src="./js/cloud.js"></script>
+    <script src="./js/sky.js"></script>
+    <script src="./js/airPlane.js"></script>
+</head>
+<style>
+    #world{
+       position: absolute;
+        top:0;
+        left:0;
+       width:100%;
+       height:100%;
+       overflow: hidden;
+        background: linear-gradient(#e4e0ba, #f7d9aa);
+    }
+</style>
+<body>
+  <div id="world"></div>
+<script>
+    //1.自定义调色板
+    var Colors={
+        red:0xf25346,
+        white:0xd8d0d1,
+        brown:0x59332e,
+        pink:0xF5986E,
+        brownDark:0x23190f,
+        blue:0x68c3c0,
+    }
+    //2. 定义需要用到的场景对象等变量
+    var scene,camera,renderer,HEIGHT,WIDTH,aspectRatio,fieldOfView,nearPlane,farPlane,Seaobject,Sky,container;
+    var mousePos={x:0,y:0};
+
+
+    //3. 需要创建的所有主要函数放在init中
+    window.addEventListener('load',init,false)
+    init();
+    function init() {
+        //创建场景、相机、渲染器
+        createScene();
+        //加入灯光
+        createLights();
+        //添加对象
+         createPlane();
+          createSea();
+          createSky();
+
+        //add the listener
+        document.addEventListener('mousemove', handleMouseMove, false);
+
+        //循环函数更新各对象状态
+        loop();
+
+    }
+
+    //4.场景
+    function createScene(){
+       HEIGHT=window.innerHeight;
+       WIDTH=window.innerWidth;
+
+       //创建场景
+       scene=new THREE.Scene();
+       scene.fog=new THREE.Fog(0xf7d9aa, 100, 950);
+
+       //创建相机
+       aspectRatio=WIDTH / HEIGHT;
+       fieldOfView=60;
+       nearPlane=1;
+       farPlane=10000;
+       camera=new THREE.PerspectiveCamera(
+           fieldOfView,
+           aspectRatio,
+           nearPlane,
+           farPlane
+       );
+       camera.position.x=0;
+       camera.position.z=200;
+       camera.position.y=100;
+       //创建渲染器
+       renderer=new THREE.WebGLRenderer({
+           alpha:true,
+           antialias:true
+       })
+        renderer.setSize(WIDTH,HEIGHT)
+        //enable shadow rendering
+        renderer.shadowMap.enabled=true;
+       //将render渲染的DOM添加到容器中
+        container=document.getElementById('world');
+        container.appendChild(renderer.domElement)
+       //当用户调整屏幕宽度时需更新渲染尺寸和相机长宽比
+        window.addEventListener('resize',hadleWindowResize,false)
+
+        function hadleWindowResize() {
+            HEIGHT=window.innerHeight;
+            WIDTH=window.innerWidth;
+            renderer.setSize(WIDTH,HEIGHT);
+            camera.aspect=WIDTH/HEIGHT;
+            camera.updateProjectionMatrix();
+        }
+    //createScene末尾
+    }
+
+    //5.灯光
+    var hemisphereLight,shadowLight;
+    
+    function createLights() {
+        // A hemisphere light is a gradient colored light;
+        // the first parameter is the sky color, the second parameter is the ground color,
+        // the third parameter is the intensity of the light
+        hemisphereLight = new THREE.HemisphereLight(0xaaaaaa,0x000000, .9)  //
+
+        // A directional light shines from a specific direction.
+        // It acts like the sun, that means that all the rays produced are parallel.
+        shadowLight=new THREE.DirectionalLight(0xffffff,.9)
+
+        //set the direction of the light
+        shadowLight.position.set(150,350,350)
+        // Allow shadow casting
+        shadowLight.castShadow=true;
+
+        // define the visible area of the projected shadow
+        shadowLight.shadow.camera.left = -400;
+        shadowLight.shadow.camera.right = 400;
+        shadowLight.shadow.camera.top = 400;
+        shadowLight.shadow.camera.bottom = -400;
+        shadowLight.shadow.camera.near = 1;
+        shadowLight.shadow.camera.far = 1000;
+
+        // define the resolution of the shadow; the higher the better,
+        // but also the more expensive and less performant
+        shadowLight.shadow.mapSize.width=2048;
+        shadowLight.shadow.mapSize.height=2048;
+
+        // to activate the lights, just add them to the scene
+         scene.add(hemisphereLight);
+         scene.add(shadowLight);
+    //createLights结尾
+    }
+
+    //6. 创建对象
+     //6.1: 首先从创造海洋开始，因为它是我们必须处理的最简单的对象。为了简单起见，我们将把大海说成是一个放在屏幕底部的简单的蓝色圆柱体。稍后我们将深入探讨如何改善这种形状。
+    // First let's define a Sea object :
+       //from  js/seaObject.js
+
+    //实例化sea 并将其添加到scene中
+
+    var sea;
+
+    function createSea(){
+        sea=new Seaobject();
+        // push it a little bit at the bottom of the scene
+        sea.mesh.position.y = -600;
+        // add the mesh of the sea to the scene
+        scene.add(sea.mesh)
+    }
+
+    //6.2 用随机组合的立方体创造云
+      //from  js/cloud.js
+
+     //6.3 创造天空
+    // Define a Sky Object
+    //from  js/sky.js
+
+    // Now we instantiate the sky and push its center a bit
+    // towards the bottom of the screen
+
+    var sky;
+
+    function createSky(){
+        sky = new Sky();
+        sky.mesh.position.y = -600;
+        scene.add(sky.mesh);
+    }
+
+    //6.4 创建飞机
+     //from   js/airPlane.js
+    var airplane;
+
+    function createPlane(){
+        airplane = new AirPlane();
+        airplane.mesh.scale.set(.25,.25,.25);
+        airplane.mesh.position.y = 100;
+        scene.add(airplane.mesh);
+    }
+    //对所有对象进行渲染
+   // renderer.render(scene, camera);
+    
+    //loop函数使画面动起来
+    function loop() {
+        // Rotate the sea and the sky
+        sea.mesh.rotation.z+=.005;
+        sky.mesh.rotation.z+=10;
+
+        // update the plane on each frame
+        updatePlane();
+
+        //render the secen
+        renderer.render(scene, camera)
+
+        // call the loop function again
+        requestAnimationFrame(loop)
+    }
+
+    //添加交互鼠标移动飞机跟着移动
+    //var mousePos={x:0,y:0}
+
+    function handleMouseMove(event) {
+        var tx = -1 + (event.clientX / WIDTH)*2;
+        var ty = 1 - (event.clientY / HEIGHT)*2;
+        mousePos = {x:tx, y:ty};
+    }
+
+    //根据鼠标移动更新飞机抓鬼你太
+    function updatePlane(){
+
+        // let's move the airplane between -100 and 100 on the horizontal axis,
+        // and between 25 and 175 on the vertical axis,
+        // depending on the mouse position which ranges between -1 and 1 on both axes;
+        // to achieve that we use a normalize function (see below)
+
+        var targetX = normalize(mousePos.x, -1, 1, -100, 100);
+        var targetY = normalize(mousePos.y, -1, 1, 25, 175);
+
+        // update the airplane's position
+        airplane.mesh.position.y = targetY;
+        airplane.mesh.position.x = targetX;
+        airplane.propeller.rotation.x += 0.3;
+    }
+
+    function normalize(v,vmin,vmax,tmin, tmax){
+
+        var nv = Math.max(Math.min(v,vmax), vmin);
+        var dv = vmax-vmin;
+        var pc = (nv-vmin)/dv;
+        var dt = tmax-tmin;
+        var tv = tmin + (pc*dt);
+        return tv;
+    }
+
+
+
+</script>
+</body>
+</html>

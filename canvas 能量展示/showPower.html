@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas 能量展示</title>
+</head>
+<body>
+   <canvas id="ctx" width="600" height="300">
+
+   </canvas>
+
+</body>
+<script>
+    window.onload=function () {
+        var canvas=document.getElementById('ctx');
+        var ctx=canvas.getContext('2d');
+        ctx.strokeStyle='green';
+        ctx.lineWidth=2;
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(100,200);
+        for(var i=1;i<=10;i++){
+            var x=100-5*i;
+            var y=200-10*i;
+            ctx.lineTo(x,y);
+        };
+        ctx.lineTo(120,100);
+        ctx.lineTo(120,200);
+        ctx.lineTo(100,200);
+        ctx.stroke();
+
+        ctx.restore();
+        //绘制能量块的函数  102,198,
+        function drawBlock(ctx,x,y,x1,y1,x2,y2,x3,y3) {
+            //ctx.fillStyle='red';
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(x,y);
+            ctx.lineTo(x1,y1);
+            ctx.lineTo(x2,y2);
+            ctx.lineTo(x3,y3);
+            var linearGradient1 = ctx.createLinearGradient(x2,y2,x3,y3);
+            linearGradient1.addColorStop(0, 'green');
+            linearGradient1.addColorStop(1, 'red');
+            ctx.fillStyle=linearGradient1;
+            ctx.fill();
+        }
+
+        drawBlock(ctx,102,198,92,178,118,178,118,198);
+
+    }
+</script>
+</html>

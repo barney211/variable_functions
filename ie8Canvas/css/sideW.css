@@ -1,0 +1,792 @@
+ *{
+        margin:0;
+        padding:0;
+		box-sizing:border-box;
+
+    }
+    .sideInfo{
+        /*width:377px;*/
+        width:0px;
+        height:815px;
+        overflow-y:auto;
+        overflow-x: hidden;
+        position: absolute;
+        top:0;
+        right:0;
+        transition: width 1s linear;
+        z-index:100;
+        box-sizing: border-box;
+        color:#333;
+        font-size:12px;
+		/*width:377px;*/
+		/*text-shadow:0 0 8px black;*/
+		background:rgba(11,57,109,0.6);
+		
+    }
+	.sideInfoUnderHeader{
+		width:100%;border:1px solid transparent;height:805px;
+	}
+	.addBackground{
+		background:rgba(0,0,0,0.5);
+	}
+
+    .closeSide{
+        width:100%;
+        height:20px;
+        padding-left:12px;
+        background:rgba(22,52,165,0.75);
+        line-height:20px;
+        position: relative;
+		color:#fff;
+    }
+    .heartP,.oxgen,.panel{
+        width:350px;
+        margin:0 auto;
+        border:1px solid transparent;
+    }
+	.heartP{
+		 height:195px;
+	}
+	.oxgen{
+		height:166px;
+	}
+	.panel{
+		height:165px;
+		width:365px;
+	}
+    .heartShow,.oxgenShow,.panelShow{
+        width:100%;
+        height:195px;
+        transition: all 1s linear;
+        /*border:1px solid red;*/
+        display: flex;
+        /*//background:rgba(0,0,0,0.2);*/
+    }
+	.panelShow{
+		margin:0 auto;
+		height:100%;
+		width:340px;
+	}
+	.heartShow{
+    position:relative;
+}
+    .showOInfo>div>div{
+        margin-bottom: 3px;
+		text-shadow:0 0 2px black;
+    }
+    .leftBox{
+        width:234px;
+        flex:2;
+        height:100%;
+		position:relative;
+    }
+    .rightBox{
+        width:116px;
+        flex:1;
+        height:100%;
+    }
+    .rightBox>div{
+        width:100%;
+        height:97px;
+        border-left:1px solid #5791f3;
+        border-bottom:1px solid #5791f3;
+    }
+	.walt{
+		text-shadow:0 0 2px black;
+	}
+    .subHeader{
+		margin-top:0;
+        width:100%;
+        height:20px;
+        line-height: 20px;
+        padding-left:10px;
+        padding-right: 20px;
+        display: flex;
+		background:rgba(22,52,185,0.25);
+       /*background: url("../../images/img2/title.png") no-repeat top center;*/
+       /*background-size: 100% 100%;*/
+        font-size: 14px;
+        font-family: "微软雅黑";
+        font-weight: bold;
+        color:#fff;
+		text-shadow:0 0 2px black;
+    }
+    .close{
+        height:0;
+        display:none;
+
+    }
+    .ranksB{
+        position:absolute;
+        top:100%;
+        right:0;
+        width:120px;
+       /* height:110px;*/
+        background: rgba(11,57,109,0.6);
+        padding-top:10px;
+        padding-left:14px;
+        display:none;
+        z-index:2;
+		text-shadow:0 0 2px black;
+
+    }
+    .ranksB>div{
+        margin-bottom:5px;
+    }
+    .ranksB span{
+        color:#ffffff;
+        font-size: 12px;
+    }
+    .ranksB img{
+        position: absolute;
+        right:12px;
+        margin-top:2px;
+        width:25px;
+        height:13px;
+    }
+    .power{
+        width:350px;
+        margin:0 auto;
+        border:1px solid transparent;
+    }
+    .powerShow{
+        font-size:12px;
+        color:#fff;
+        display:flex;
+        margin-top:6px;
+		height:60px;
+    }
+    .powerShow span{
+        font-size: 14px;
+        color:#f36132;
+        font-weight: bold;
+    }
+	#bartteryStatus,.plugin{
+		height:60px;
+	}
+	#rightB{
+		flex:1; margin-top:12px;padding-left:20px;
+		text-shadow:0 0 2px black;
+	}
+	.leftBbox{
+		flex:1; padding-left:6px;margin-top:12px;
+		text-shadow:0 0 2px black;
+	}
+	/*新增血气样式  下*/
+	.bloodGas{
+		width:350px;
+        margin:0 auto;
+        border:1px solid transparent;
+		color:#fff;
+		text-shadow: 0 0 2px black;
+	}
+	.bloodGas>div{
+		display:flex;
+		height:
+	}
+	.bloodGas>div>div{
+		flex:1;
+	}
+	.bloodGas>div>div>p{
+		width:100%;
+		height:20px;
+		line-height:20px;
+		padding-left:15px;
+		margin-bottom:0;
+	}
+	.DisNo{
+		display:none;
+	}
+	.DisYes{
+		display:block;
+	}
+	
+	/*新增血气样式  上*/
+    /*以下为放大的心电的样式*/
+    .heartExpansion{
+        width:700px;
+        height:450px;
+        position: absolute;
+        top:0;
+        right:375px;
+        background: rgba(0,0,0,0.65);
+        z-index:2;
+		display:none;
+    }
+	.colorG{
+		color:#4ef97f;
+	}
+	/*后修改心电样式增加的代码*/
+	#heartL{
+        color:#4ef97f;width:30px;height:10px;position: absolute;top:7px;left:3px;line-height:10px;text-align: center;font-size:3px;
+
+
+    }
+	#heartL1{
+        color:#4ef97f;width:60px;height:20px;position: absolute;top:12px;left:5px;line-height:20px;text-align: center;font-size:14px;
+    }
+    .marker1{
+        position: absolute;
+        top:30px;
+        left:42px;
+        width:40px;
+        height:50px;
+        background: transparent;
+        border-left:2px solid #4ef97f;
+    }
+    .marker1>span{
+        color:#4ef97f;
+        position: absolute;
+        left:3px;
+        bottom:0;
+    }
+    .marker2{
+        position: absolute;
+        top:60px;
+        left:80px;
+        width:40px;
+        height:100px;
+        background: transparent;
+        border-left:2px solid #4ef97f;
+    }
+    .marker2>span{
+        color:#4ef97f;
+        position: absolute;
+        left:3px;
+        bottom:0;
+    }
+	.voltageCover{
+		display:none;
+	}
+	.FiveLead{
+    position: absolute;
+    top:0;
+    right:375px;
+    width:365px;
+    height:830px;
+    //border:1px solid red;
+    background:rgba(0,0,0,0.65);
+    display:none;
+	z-index:2;
+}
+.Lead1{
+    font-size:14px;
+    color:#4ef97f;
+    //padding-left:5px;
+    margin:0;
+}
+/*新的仪表盘样式向下*/
+/*调整仪表盘样式*/
+
+.oxgenShow{
+    height:166px;
+}
+.oxgen{
+    height:166px;
+}
+#panel{
+    position: relative;width:100%;height:165px;background: url('../images/img2/panelBg.png') no-repeat top center; background-size:100% 145px;
+	text-shadow:0 0 2px black;
+}
+#panel>div{
+    position: absolute;
+}
+.flexS{
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+.cost{
+    color:#6a9abd;font-size:10px;
+    font-weight: bold;left:94px;top:1px;height:15px;line-height:15px;
+    -webkit-transform : scale(0.75,0.75) ;
+    -webkit-transform-origin:0;
+
+}
+.Data-middle{
+    left:110px;
+    top:30px;
+    width:124px;
+    height:72px;
+    color:white;
+    font-size:12px;
+    font-weight: bold;
+    padding-left:5px;
+	color:#ffffff;
+
+}
+.Data-middle>div{
+	margin-top:5px;
+	margin-bottom:5px;
+}
+.Data-middle span{
+    display:inline-block;
+}
+.totalMileage{
+	position:absolute;
+	top:112px;
+    left:90px;
+	width:160px;
+	height:25px;
+	line-height:25px;
+	font-size:16px;
+	font-weight:bold;
+	color:#ffffff;
+	text-align:center;
+}
+.speed{
+    width:86px;
+    height:66px;
+    top:25px;
+    left:10px;
+    text-align: center;
+    line-height: 66px;
+    color:#ffffff;
+    font-size:30px;
+}
+.fuelCost{
+    width:86px;
+    height:66px;
+    top:25px;
+    left:245px;
+    text-align: center;
+    line-height: 66px;
+    color:#ffffff;
+    font-size:30px;
+}
+.gear{
+    color:#359cff;
+    font-size: 16px;
+    font-weight: bold;
+    top:96px;
+    left:278px;
+    width:20px;
+    heigth:22px;
+    line-height: 22px;
+    text-align: center;
+}
+.state{
+    font-size:12px;
+    font-weight: bold;
+    bottom:3px;
+    color:white;
+}
+#cc1,#cc2{
+    position: absolute;
+    background: transparent;
+    bottom:8px;
+}
+.alarm{
+    position: absolute;
+    top:90px;
+    left:40px;
+    /*display: none;*/
+}
+.forChromeS{
+    display:inline-block;margin-left:25px;
+}
+.forOther{
+    display:inline-block;margin-left:50px;
+}
+.forQQ{
+	display:inline-block;margin-left:8px;
+}
+.TheLead{   
+	color:#fff;
+}
+/*N系列新增的样式*/
+.Ntop{
+    width:100%;
+    /*height:172px;*/
+    height:88.2%;
+    display:flex;
+    position: relative;
+}
+.leftN{
+    flex:4;
+    /*height:172px;*/
+    height:100%;
+}
+.leftNCover{
+    /*width:278px;*/
+    width:80%;
+    /*height:172px;*/
+    height:100%;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index:10;
+}
+.rightN{
+    flex:1;
+    /*height:172px;*/
+    height:100%;
+    font-size: 8px;
+    color:#4ef97f;
+}
+.rightNSub{
+    width:100%;display:flex;
+}
+.leftInfo{
+    flex:1;
+    height:100%;
+	font-size:12px;
+	
+    /*line-height: 15px;*/
+    transform: scale(0.66,0.66);  transform-origin: 0;
+	
+
+}
+.rightInfo{
+    flex:2;font-size:18px;
+    height:100%;
+   padding-top:7px;
+}
+.temp_bottom{
+    width:100%;
+    /*height:25px;*/
+    height:11.8%;
+    font-size:18px;
+    display:flex;
+    position: absolute;
+    left:0;
+    bottom:0;
+	text-shadow:0 0 2px black;
+}
+canvas{
+  display:block;
+}
+.N1large{
+    width:100%;
+    display:block;
+    /*justify-content: space-between;*/
+    background: rgba(0,0,0,0.95);
+    /*z-index:200;*/
+    /*height:0;*/
+    overflow-y: auto;
+	z-index:10000;
+	position:absolute;
+	top:0;
+	left:0;
+	min-width:1260px;
+	overflow-x:auto;
+    height:100%;
+}
+.BtControlSideBlock{
+	z-index:10000;
+	justify-content: space-between;
+	display:flex;
+	position:absolute;
+	top:68px;
+	right:200px;
+	width:200px;
+	height:18px;
+    display:none;
+	font-size:14px;
+}
+.BtControlSideBlock>div{
+	width:80px;
+	height:18px;
+	
+	text-align:center;
+	
+
+	border-radius:5px;
+}
+.mainInfo{
+    width:40%;
+	/*
+    height:25%;
+	display:flex;
+	justify-content:space-between;
+	flex-wrap:wrap;
+	
+*/
+position:relative;
+}
+.mainInfo canvas{
+	margin-bottom:39px;
+}
+.heartWaves{
+    width:60%;
+    /*height:75%;*/
+    border:1px solid green;
+    color:#4ef97f;
+    font-size:12px;
+    position:relative;
+	display:flex;
+}
+.normalLeads,.vLeads{
+	width:50%;
+}
+
+.leftWaveInfo{
+    width:100%;
+	display:flex;
+
+}
+.rightDataInfo{
+    width:100%;
+	display:flex;
+
+}
+.heartWaveIndexL{
+    width:100%;
+    height:30px;
+    font-size: 18px;
+}
+.heartWaveIndexL>span{
+    display: inline-block;
+   /* width:15%;*/
+   margin-right:10px;
+    height:100%;
+    line-height: 30px;
+}
+.artDataCover{
+    position: absolute;
+    color:#f2394f;
+    z-index: 10;
+}
+.bottomInforL{
+    width:100%;
+    display: flex;
+    height:80px;
+    color:#fff;
+}
+.bottomInforLsub1{
+    flex:2;
+    position: relative;
+    height:100%;
+}
+.bottomInforLsub2{
+	flex:1;
+}
+.bottomInforLsub3{
+	flex:2;
+}
+#NIBPDIA,#NIBPSYS,#NIBPMEAN{
+	margin-top:15px;
+}
+.height1,.height2{
+    position: relative;width:100%;
+	margin-bottom:39px;
+}
+.N1interface{
+    width:100%;display:flex;justify-content: space-between;border:2px solid green;
+}
+.leadOF{
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    color:#4ef97f;
+    font-size:12px;
+}
+.leadTitle{
+    width:100%;height:15px;line-height: 15px;
+}
+.heartWaves canvas{
+    display:block;
+    margin-left:10px;
+	margin-bottom:20px;
+}
+.leadOF canvas{
+    display:block;
+    margin-left:25px;
+}
+/*媒体查询的样式*/
+#artRateFS{
+	position: absolute;top:1%;left:20%;font-size: 15px;
+}
+#respRateFS{
+	position: absolute;top:1%;left:20%;font-size: 50px;
+}
+#PlethRateFS{
+	position: absolute;top:1%;left:20%;font-size: 50px;
+}
+#heartRateFS{
+	position: absolute;top:30%;left:20%;font-size: 50px;
+}
+.respD1{
+	position: absolute;top:12px;left:0;
+}
+.respD2{
+	position: absolute;bottom:-18px;left:0;font-size: 12px;
+}
+.heartD1{
+	position: absolute;top:0px;left:0;
+}
+.heartD2{
+	position: absolute;bottom:0px;left:0;font-size: 12px;
+}
+.plethD1{
+	position: absolute;top:0px;left:0;
+}
+.plethD2{
+	position: absolute;bottom:-5px;left:0;font-size: 12px;
+}
+.plethD3{
+	/*position: absolute;top:10px;right:20px;font-size: 12px;*/
+}
+.plethD4{
+	/*position: absolute;bottom:18px;right:20px;font-size: 12px;*/
+}
+.inlineSpan{
+	dispay:inline-block;
+	margin-left:15px;
+}
+.artData1{
+	position: absolute;top:-10px;left:0;
+}
+.artData2{
+	position: absolute;bottom:-20px;left:0;font-size: 12px;
+}
+
+@media screen and (max-width: 1340px){
+    #heartRateFS{
+		position: absolute;top:30%;left:20%;font-size: 50px;
+	}
+	#PlethRateFS{
+		position: absolute;top:1%;left:20%;font-size: 40px;
+	}
+	#artRateFS{
+		position: absolute;top:1%;left:20%;font-size: 15px;
+	}
+	#respRateFS{
+		position: absolute;top:10%;left:20%;font-size: 50px;
+	}
+	
+	.respD1{
+	position: absolute;top:5px;left:0;
+}
+.respD2{
+	position: absolute;bottom:-18px;left:0;font-size: 12px;
+}
+.heartD1{
+	position: absolute;top:-5px;left:0;
+}
+.heartD2{
+	position: absolute;bottom:0px;left:0;font-size: 12px;
+}
+.plethD1{
+	position: absolute;top:-5px;left:0;
+}
+.plethD2{
+	position: absolute;bottom:-10px;left:0;font-size: 12px;
+}
+.artData1{
+	position: absolute;top:-10px;left:0;
+}
+.artData2{
+	position: absolute;bottom:-15px;left:0;font-size: 12px;
+}
+	
+}
+/*新增医疗信息边栏 下*/
+
+.leftMedicalInfo{
+    position: absolute;
+    left:0;
+    bottom: 0;
+    width:205px;
+    max-height:512px;
+    background: rgba(11,57,109,0.6);
+    font-size:12px;
+    overflow-y: auto;
+	z-index:100;
+	display:none;
+	/*display:none;*/
+}
+.addToleftMedicalInfo{
+	position: absolute;
+	top:0;
+    bottom: auto;
+	right:377px;
+	left:auto;
+}
+
+.closeMedicalInfo{
+    width:8px;
+    height:14px;
+    position: absolute;
+    top:3px;
+    right:9px;
+}
+.titlePic{
+    width:100%;
+    height:20px;
+	line-height:20px;
+    margin-top:10px;
+	background:rgba(22,52,182,0.25);
+	color:#ffffff;
+	text-shadow:0 0 2px black;
+	font-size:14px;
+	font-weight:bold;
+}
+.InfoHeader{
+    font-weight: bold;
+    background: rgba(14,34,124,0.45);
+    width:100%;
+    height:20px;
+    line-height: 20px;
+    text-align:center;
+    display: flex;
+    color:#ffffff;
+	text-shadow:0 0 2px black;
+}
+.InfoHeader>div{
+    flex:1
+}
+.crewInfoWindow{
+    width:100%;
+	height:100px;
+	text-shadow:0 0 2px black;
+}
+.crewInfo,.deviceInfo{
+    width:100%;
+    height:20px;
+    display: flex;
+    line-height: 20px;
+    text-align: center;
+    color:#fff;
+	background:rgba(22,52,185,0.15);
+}
+.colorChange{
+	background:rgba(86,182,237,0.25);
+}
+.crewInfo>div,.deviceInfo>div{
+   flex:1;
+
+}
+.deviceInfoWindow{
+    width:100%;
+    /*height:220px;*/
+
+}
+/*新增医疗信息边栏 上*/
+
+/*新增心电回放 下*/
+#ecgPlayBack{
+    display:flex;
+	position:absolute;
+	right:240px;
+	bottom:20px;
+	width:509px;
+}
+#ruler{
+	position:relative;
+	background:red;
+	width:440px;
+	height:44px;
+	background:url('../images/img2/ruler.png') top center no-repeat;
+	background-size:100% 100%;
+	
+	}
+#niddle{
+	width:18px;
+	height:18px;
+    display:block;
+	position:absolute;
+	top:26px;
+	left:411px;
+}
+/*新增心电回放 上*/
